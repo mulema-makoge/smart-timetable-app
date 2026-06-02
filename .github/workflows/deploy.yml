@@ -9,6 +9,10 @@ jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: smart_timetable
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -35,3 +39,5 @@ jobs:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
           channelId: live
           projectId: smart-timetable-4371d
+        env:
+          working-directory: smart_timetable
