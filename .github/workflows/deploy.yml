@@ -39,5 +39,4 @@ jobs:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
           channelId: live
           projectId: smart-timetable-4371d
-        env:
-          working-directory: smart_timetable
+          entryPoint: smart_timetable
