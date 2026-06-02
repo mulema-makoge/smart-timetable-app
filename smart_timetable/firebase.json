@@ -1,1 +1,35 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"smart-timetable-4371d","appId":"1:1065656026943:android:58b150d44daca5f5d3b58a","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"smart-timetable-4371d","configurations":{"web":"1:1065656026943:web:1f6556284b06f122d3b58a"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "smart-timetable-4371d",
+          "appId": "1:1065656026943:android:58b150d44daca5f5d3b58a",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "smart-timetable-4371d",
+          "configurations": {
+            "web": "1:1065656026943:web:1f6556284b06f122d3b58a"
+          }
+        }
+      }
+    }
+  },
+  "hosting": {
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

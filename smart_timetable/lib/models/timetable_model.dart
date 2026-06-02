@@ -25,7 +25,6 @@ class ScheduleSlot {
     required this.endTime,
   });
 
-  // Convert to a Map for saving to Firestore
   Map<String, dynamic> toMap() {
     return {
       'courseId': courseId,
@@ -42,20 +41,20 @@ class ScheduleSlot {
     };
   }
 
-  // Create a ScheduleSlot from a Firestore document
+  // Null-safe fromMap
   factory ScheduleSlot.fromMap(Map<String, dynamic> map) {
     return ScheduleSlot(
-      courseId: map['courseId'],
-      courseName: map['courseName'],
-      lecturerId: map['lecturerId'],
-      lecturerName: map['lecturerName'],
-      roomId: map['roomId'],
-      roomName: map['roomName'],
-      classId: map['classId'],
-      className: map['className'],
-      day: map['day'],
-      startTime: map['startTime'],
-      endTime: map['endTime'],
+      courseId: map['courseId'] as String? ?? '',
+      courseName: map['courseName'] as String? ?? '',
+      lecturerId: map['lecturerId'] as String? ?? '',
+      lecturerName: map['lecturerName'] as String? ?? '',
+      roomId: map['roomId'] as String? ?? '',
+      roomName: map['roomName'] as String? ?? '',
+      classId: map['classId'] as String? ?? '',
+      className: map['className'] as String? ?? '',
+      day: map['day'] as String? ?? '',
+      startTime: map['startTime'] as String? ?? '',
+      endTime: map['endTime'] as String? ?? '',
     );
   }
 }
@@ -64,8 +63,5 @@ class Timetable {
   List<ScheduleSlot> slots;
   int fitnessScore;
 
-  Timetable({
-    required this.slots,
-    this.fitnessScore = 0,
-  });
+  Timetable({required this.slots, this.fitnessScore = 0});
 }
