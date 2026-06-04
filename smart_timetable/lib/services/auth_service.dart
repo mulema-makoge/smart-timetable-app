@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -19,16 +20,23 @@ class AuthService {
       final user = _auth.currentUser;
       if (user == null) return null;
 
-      // Check admins collection first
-      final adminDoc = await _db.collection('admins').doc(user.uid).get();
+      debugPrint('Checking role for: ${user.email} | UID: ${user.uid}');
+
+      final adminDoc =
+          await _db.collection('admins').doc(user.uid).get();
+      debugPrint('Admin doc exists: ${adminDoc.exists}');
       if (adminDoc.exists) return 'admin';
 
-      // Check lecturers collection
-      final lecturerDoc = await _db.collection('lecturers').doc(user.uid).get();
-      if (lecturerDoc.exists) return 'lecturer';
+      final lecturerSnap = await _db
+          .collection('lecturers')
+          .where('email', isEqualTo: user.email)
+          .get();
+      debugPrint('Lecturer docs found: ${lecturerSnap.docs.length}');
+      if (lecturerSnap.docs.isNotEmpty) return 'lecturer';
 
       return null;
     } catch (e) {
+      debugPrint('getUserRole error: $e');
       return null;
     }
   }
